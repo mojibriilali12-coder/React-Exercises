@@ -1,12 +1,14 @@
+import ShoppingCart from "./ShoppingCart";
 
-import Greeting from './Greeting';
-
-import UserCard from './UserCrad';
 
 function App(){
-  return(
-  <UserCard/>
-  )
+    return(
+        <>
+         
+         <ShoppingCart/>
+        
+        </>
+    )
 }
 
 export default App;
