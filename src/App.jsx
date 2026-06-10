@@ -4,24 +4,30 @@ import { useEffect, useState } from "react";
 
 function App(){
     
-    const[title, setTitle]=useState("hello")
+    const[width, setWidth]=useState(window.innerWidth)
 
-     const[name, setName]=useState("")
+  
     
     useEffect(()=>{
-        document.title = name ? `${title} ${name}` : "Welcome";
         
+       const handleResize= ()=> setWidth(window.innerWidth)
+
+
+        window.addEventListener('resize', handleResize)
+
+        return()=>{
+         
+            window.removeEventListener("resize", handleResize)
+        }
      
-    },[title,name])
+    },[])
 
 
      
 
     return(
        <div>
-        <h2>Type this</h2>
-         <input type="text"  value={name} onChange={(e) =>  setName(e.target.value)} />
-        <input type="text"  value={title} onChange={(e) => setTitle(e.target.value)} />
+        <p>window width {width}px</p>
        </div>
     )
 }
