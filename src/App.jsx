@@ -4,51 +4,54 @@ import { useEffect, useState } from "react";
 
 function App(){
     
-    const[time, setTime]=useState(0)
+    const[user, setUser]=useState([])
 
-    const[isRuning, setIsruning]=useState(false)
+    const[loading, setLoud]=useState(false)
 
-  
+    
     useEffect(()=>{
 
-      let timerId;
-      if(isRuning){
+  
+      const fetchUser = async()=>{
+    
+            setLoud(true)
 
-        timerId= setInterval(()=>{
-            setTime((prev)=> prev + 1)
-        },1000)
+         try{
+     
+            const response = await fetch("https://jsonplaceholder.typicode.com/users")
+
+            const data = await response.json()
+             
+            console.log(data)
+            setUser(data)
+            setLoud(false)
+         }catch(error){
+            console.log('error', error)
+         }
       }
 
-     return ()=> clearInterval(timerId)
+      fetchUser()
 
-    },[isRuning])
-    
+    },[])
+  
    
-    const handleStart=()=>{
-      setIsruning(true)
-    }
-
-
-    const handleStop=()=>{
-      setIsruning(false)
-    }
-
+     if(loading) return <h1>Loading...</h1>
     
-    const handleReset=()=>{
-
-      setIsruning(false)
-      setTime(0)
-    }
-     
-
     return(
-       <div>
-        <h2>StopWatch {time}</h2>
-       <button disabled={isRuning} onClick={handleStart}>Start</button>
-      <button disabled={!isRuning}onClick={handleStop}>stop</button>
-        <button onClick={handleReset}>Reset</button>
-       </div>
+      <div>
+       <h2>List of Users</h2>
+       <ul>
+         {
+            user.map((u)=>(
+             
+               <li>{u.name}</li>
+            ))
+         }
+       </ul>
+      </div>
     )
+    
+    
 }
 
 export default App;
