@@ -4,21 +4,21 @@ import { useEffect, useState } from "react";
 
 function App(){
     
-    const[user, setUser]=useState([])
+    const[user, setUser]=useState()
 
-    const[loading, setLoud]=useState(false)
+    const[loading, setLoud]=useState(null)
 
     
-    useEffect(()=>{
+   
 
   
-      const fetchUser = async()=>{
+      const getUser = async()=>{
     
             setLoud(true)
 
          try{
      
-            const response = await fetch("https://jsonplaceholder.typicode.com/users")
+            const response = await fetch( "https://api.github.com/users/mojibriilali12-coder")
 
             const data = await response.json()
              
@@ -30,28 +30,41 @@ function App(){
          }
       }
 
-      fetchUser()
+     
 
-    },[])
+   
   
    
      if(loading) return <h1>Loading...</h1>
     
     return(
       <div>
-       <h2>List of Users</h2>
-       <ul>
-         {
-            user.map((u)=>(
-             
-               <li>{u.name}</li>
-            ))
-         }
-       </ul>
-      </div>
-    )
-    
-    
-}
+         <input type="text" placeholder="github User" onChange={(e)=> setUser(e.target.value)}/>
+         <button onClick={getUser}>Search</button>
+       {user && (
+        <div>
+          <img
+            src={user.avatar_url}
+            alt={user.login}
+            width="150"
+          />
 
+          <h2>{user.name}</h2>
+          <p>Username: {user.login}</p>
+          <p>Followers: {user.followers}</p>
+          <p>Following: {user.following}</p>
+          <p>Public Repos: {user.public_repos}</p>
+
+          <a
+            href={user.html_url}
+            target="_blank"
+            rel="noreferrer"
+          >
+            View Profile
+          </a>
+        </div>
+      )}
+    </div>
+  );
+}
 export default App;
