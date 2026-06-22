@@ -1,10 +1,10 @@
-import LoginForm from "./LoginForm";
+import CounterWithReducer  from "./CounterWithReducer";
 
-function App(id){
+function App(){
     
    
     return(
-      <LoginForm/>
+      <CounterWithReducer/>
     )
 
 
