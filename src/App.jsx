@@ -1,17 +1,30 @@
 import { useState } from "react";
-import Header  from "./Header";
 
-import UserContext from "./UserContext";
+import ThemeContext from "./ThemeContext";
+import ThemeComponent from "./ThemeComponent";
+
 
 function App(){
     
-   const [user, setUser] = useState({name:"ali", role:"admin"})
+  const [theme, setTheme]=useState("light")
+
+
+   const toggleTheme =()=>{
+    setTheme((prev)=>(prev === "light" ? "dark" : "light"))
+   }
+
     return(
-      <UserContext.Provider value={user}>
-      <h2>My Application</h2>
-      
-      <Header/>
-      </UserContext.Provider>
+
+
+    
+      <ThemeContext.Provider value={theme}>
+        
+        <button onClick={toggleTheme}>Switch to {theme === "light" ? "Dark": "light"}</button>
+
+        <h2>Theme Context</h2>
+        <ThemeComponent/>
+      </ThemeContext.Provider>
+    
     )
 }
 
