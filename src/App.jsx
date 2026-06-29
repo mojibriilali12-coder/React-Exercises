@@ -1,6 +1,7 @@
 import { useState } from "react";
-import GitHub from "./GitHub";
-import Posts from "./Posts";
+import { TodoApp } from "./TodoApp";
+
+
 
 
 
@@ -11,13 +12,15 @@ function App(){
   
 
     return(
-      <>
-      <GitHub/>
-      <Posts/>
+
+      <TodoApp/>
+    )
+     
+    
    
     
-      </>
-    )
+     
+    
 
 
     
