@@ -1,9 +1,5 @@
-import { useState } from "react";
-import { TodoApp } from "./TodoApp";
 
-
-
-
+import Courses from "./Courses";
 
 
 
@@ -12,20 +8,15 @@ function App(){
   
 
     return(
+    <div>
+         
 
-      <TodoApp/>
+       <Courses/>
+      
+     </div>
     )
-     
     
    
-    
-     
-    
-
-
-    
-     
-    
 }
 
      
